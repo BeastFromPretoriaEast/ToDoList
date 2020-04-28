@@ -30,4 +30,5 @@ Route::group(['prefix' => 'api/v1'], function() {
 
     Route::get('user/getProfile', 'UserController@getProfile');
     Route::post('user/updateProfile', 'UserController@updateProfile');
+    Route::post('user/updateProfileImage', 'UserController@updateProfileImage');
 });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us" ng-app="myApp">
 <head>
-    <title>Learn and Understand AngularJS</title>
+    <title>To do list</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
 
@@ -61,6 +61,7 @@
 
         <div class="pull-right" style="height: 45px; display: inline-block; margin-top: 22px;">
             <a href="#/profile" class="btn btn-default btn-outline-primary"><i class="glyphicon glyphicon-user mr-1"></i> Profile Settings</a>
+            <a href="#/profileImage" class="btn btn-default btn-outline-primary"><i class="glyphicon glyphicon-camera mr-1"></i> Specify Profile Picture</a>
         </div>
 
         <hr>

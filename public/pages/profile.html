@@ -4,34 +4,14 @@
     </a>
 </h3>
 
-<!--<div class="input-group">
-    <input ng-model="todoNameEdit" type="text" class="form-control" placeholder="Update task...">
+<div><label for="full_name">Edit full name</label></div>
+<div class="input-group">
+    <input ng-model="userFullName" id="full_name" type="text" class="form-control" placeholder="Full name...">
     <span class="input-group-btn">
-        <button ng-click="editTodo([[ num ]])" class="btn btn-info" type="button">
-            <i class="glyphicon glyphicon-pencil mr-1"></i> Update
-        </button>
+    <button ng-click="updateUser()" class="btn btn-info" type="button">
+        <i class="glyphicon glyphicon-pencil mr-1"></i> Update
+    </button>
     </span>
-</div>-->
-
-<div class="row">
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="full_name">Full name</label>
-            <input ng-model="userFullName" type="text" class="form-control" id="full_name" placeholder="Full name...">
-        </div>
-    </div>
-
-
-    <!--<div class="col-sm-12 text-right">
-        <button class="btn btn-info" ng-click="updateUser()"> &lt;!&ndash;user.id&ndash;&gt;
-            <i class="glyphicon glyphicon-pencil mr-1"></i> Update
-        </button>
-    </div>-->
-    <div class="col-sm-12 text-right">
-        <button class="btn btn-info" ng-click="updateUser()">
-            <i class="glyphicon glyphicon-pencil mr-1"></i> Update
-        </button>
-    </div>
 </div>
 
 <hr>

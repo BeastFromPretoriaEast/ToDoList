@@ -10882,3 +10882,11 @@ a.text-dark:focus {
   }
 }
 
+.mr-1 {
+  margin-right: 3px;
+}
+
+.navbar {
+  margin-bottom: 5px;
+}
+

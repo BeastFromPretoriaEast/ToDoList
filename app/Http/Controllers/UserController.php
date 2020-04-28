@@ -24,4 +24,10 @@ class UserController extends Controller
 
         return Auth::user()->get();
     }
+
+    public function updateProfileImage(Request $request)
+    {
+        return $request->post('file');
+    }
+
 }

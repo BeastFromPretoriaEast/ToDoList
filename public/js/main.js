@@ -16,8 +16,10 @@ myApp.config(function ($interpolateProvider, $routeProvider) {
         .when('/profile', {
             templateUrl: 'pages/profile.html',
             controller: 'editProfileController'
-        })
-    ;
+        }).when('/profileImage', {
+            templateUrl: 'pages/profileImage.html',
+            controller: 'myCtrl'
+        });
 });
 
 myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', function($scope, $filter, $http, $log) {
@@ -122,38 +124,67 @@ myApp.controller('editProfileController', ['$scope', '$http', '$log', '$routePar
             });
     }
 
-
 }]);
 
-/*
-myApp.controller('editProfileImageController', ['$scope', '$http', '$log', '$routeParams', '$location', function($scope, $http, $log, $routeParams, $location) {
-    $scope.uploadFile = function () {
-        var form_data = new FormData();
-        angular.forEach($scope.files, function (file) {
-            form_data.append('file', file);
-        });
-        $http.patch('api/v1/user/updateImage',{ form_data: form_data }, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined, 'Process-Data': false}
-        })
-        .success(function (result) {
-            alert('it worked');
-        });
-    }
-}]);
-
-myApp.directive("fileInput", function ($parse) {
+myApp.directive('fileModel', ['$parse', function ($parse) {
     return {
-        link: function ($scope, element, attrs) {
-            element.on("change", function (event) {
-                var files = event.target.files;
-                console.log(files[0].name);
-                $parse(attrs.fileInput).assign(element[0].files);
-                $scope.$apply();
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function() {
+                scope.$apply(function() {
+                    modelSetter(scope, element[0].files[0]);
+                });
             });
         }
+    };
+}]);
+myApp.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl) {
+        var fd = new FormData();
+        fd.append('file', file);
+
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function() {
+        })
+        .error(function() {
+        });
     }
-});*/
+}]);
+myApp.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
+    $scope.uploadFile = function() {
+
+        var file = $scope.myFile;
+        console.log('file is ' );
+        console.dir(file);
+        /*var uploadUrl = "./images";
+        fileUpload.uploadFileToUrl(file, uploadUrl);*/
+
+        // fileUpload
+
+        $http.post('api/v1/user/updateProfileImage', { file: file })
+            .success(function (result) {
+
+                alert(result)
+                /*$scope.userLoggedInName = result[0].name;
+
+                var myEl = angular.element( document.querySelector( '#userLoggedInName' ) );
+                myEl.text(result[0].name);
+
+                $location.path('/').replace();*/
+            })
+            .error(function (data, status) {
+                console.log(data);
+            });
+
+    };
+}]);
+
 
 
 
