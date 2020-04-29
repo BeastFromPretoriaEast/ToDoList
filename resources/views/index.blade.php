@@ -18,6 +18,7 @@
             margin-bottom: 5px;
         }
     </style>
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     <!-- load angular via CDN -->
     <script src="//code.angularjs.org/1.3.0-rc.1/angular.min.js"></script>
@@ -27,14 +28,14 @@
 <body>
 
 <header>
-    <nav class="navbar navbar-default">
+    <nav class="navbar inverse">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Welcome <span class="text-info" id="userLoggedInName">{{ Auth::user()->name }}</span></a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <a class="btn btn-default navbar-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="btn btn-dark navbar-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
                 </a>
 
