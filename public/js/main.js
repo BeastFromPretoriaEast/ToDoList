@@ -30,18 +30,19 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', functi
         .success(function (result) {
             $scope.todosPending = result.pending;
             $scope.todosCompleted = result.completed;
+
+            console.log($scope.todosPending);
         })
         .error(function (data, status) {
             console.log(data);
         });
-
-
 
     $scope.addTodo = function () {
         $http.post('api/v1/todos', { todoName: $scope.todoName })
             .success(function (result) {
                 $scope.todosPending = result.pending;
                 $scope.todosCompleted = result.completed;
+                $scope.f.todoName = ''
                 $scope.todoName = '';
             })
             .error(function (data, status) {
@@ -72,6 +73,10 @@ myApp.controller('mainController', ['$scope', '$filter', '$http', '$log', functi
     }
 
 }]);
+
+myApp.controller("filterctrl", function ($scope) {
+    $scope.todosPending
+});
 
 myApp.controller('editController', ['$scope', '$http', '$log', '$routeParams', '$location', function($scope, $http, $log, $routeParams, $location) {
 
@@ -133,58 +138,40 @@ myApp.directive('fileModel', ['$parse', function ($parse) {
             var model = $parse(attrs.fileModel);
             var modelSetter = model.assign;
 
-            element.bind('change', function() {
-                scope.$apply(function() {
+            element.bind('change', function(){
+                scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);
                 });
             });
         }
     };
 }]);
+
 myApp.service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function(file, uploadUrl) {
+    this.uploadFileToUrl = function(file, uploadUrl){
         var fd = new FormData();
         fd.append('file', file);
-
         $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
-        .success(function() {
-        })
-        .error(function() {
-        });
+            .success(function(){
+            })
+            .error(function(){
+            });
     }
 }]);
-myApp.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
-    $scope.uploadFile = function() {
 
+myApp.controller('myCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
+
+    $scope.uploadFile = function(){
         var file = $scope.myFile;
-        console.log('file is ' );
-        console.dir(file);
-        /*var uploadUrl = "./images";
-        fileUpload.uploadFileToUrl(file, uploadUrl);*/
-
-        // fileUpload
-
-        $http.post('api/v1/user/updateProfileImage', { file: file })
-            .success(function (result) {
-
-                alert(result)
-                /*$scope.userLoggedInName = result[0].name;
-
-                var myEl = angular.element( document.querySelector( '#userLoggedInName' ) );
-                myEl.text(result[0].name);
-
-                $location.path('/').replace();*/
-            })
-            .error(function (data, status) {
-                console.log(data);
-            });
-
+        console.log('file is ' + JSON.stringify(file));
+        var uploadUrl = "/images/uploads";
+        fileUpload.uploadFileToUrl(file, uploadUrl);
     };
-}]);
 
+}]);
 
 
 

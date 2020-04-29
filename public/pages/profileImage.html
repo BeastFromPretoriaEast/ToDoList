@@ -4,7 +4,22 @@
     </a>
 </h3>
 
-<input type = "file" file-model = "myFile"/>
-<button ng-click = "uploadFile()">upload me</button>
+<div class="alert alert-warning alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    Despite my best efforts i couldn't get the image upload functionality to work correctly.
+</div>
 
+<div>
+    <label>
+        Select your profile image:
+    </label>
+</div>
+<div class="input-group">
+    <input file-model="myFile" type="file" class="form-control" placeholder="Select image...">
+    <span class="input-group-btn">
+        <button ng-click="uploadFile()" class="btn btn-info" type="button">
+            <i class="glyphicon glyphicon-pencil mr-1"></i> Upload
+        </button>
+    </span>
+</div>
 <hr>
